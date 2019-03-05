@@ -265,27 +265,107 @@
 // p.fun1()
 
 // 单例模式
-class SingleInstance{
-  login(){
-    console.log('...login')
+// class SingleInstance{
+//   login(){
+//     console.log('...login')
+//   }
+// }
+
+// SingleInstance.getInstance = function(){
+//   let instance;
+//   return function(){
+//     if(!instance){
+//       instance = new SingleInstance()
+//     }
+//     return instance;
+//   }
+// }()
+
+// let In1 = SingleInstance.getInstance()
+// let In2 = SingleInstance.getInstance()
+// In1.login()
+// In2.login()
+// console.log('in1===in2',In1 === In2)
+
+// 适配器模式
+// class Adaptee {
+//   specificRequest(){
+//     return '德国标准'
+//   }
+// }
+// class Target{
+//   constructor(){
+//     this.adaptee = new Adaptee()
+//   }
+//   request(){
+//      let info = this.adaptee.specificRequest()
+//      console.log(`${info} --转换器-- 中国标准`)
+//   }
+// }
+
+// let T1= new Target();
+// T1.request()
+
+// 装饰器模式
+class Circle {
+  draw(){
+    console.log('画一个圆')
   }
 }
 
-SingleInstance.getInstance = function(){
-  let instance;
-  return function(){
-    if(!instance){
-      instance = new SingleInstance()
-    }
-    return instance;
+class Decorator{
+  constructor(circle){
+    this.circle = circle
   }
-}()
+  draw(){
+    this.circle.draw()
+    this.setBorderColor()
+  }
+  setBorderColor(){
+    console.log('设置边框颜色')
+  }
+}
 
-let In1 = SingleInstance.getInstance()
-let In2 = SingleInstance.getInstance()
-In1.login()
-In2.login()
-console.log('in1===in2',In1 === In2)
+let circle = new Circle()
+circle.draw()
+let d1 = new Decorator(circle)
+d1.draw()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
