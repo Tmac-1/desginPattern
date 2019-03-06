@@ -307,29 +307,78 @@
 // T1.request()
 
 // 装饰器模式
-class Circle {
-  draw(){
-    console.log('画一个圆')
+// class Circle {
+//   draw(){
+//     console.log('画一个圆')
+//   }
+// }
+
+// class Decorator{
+//   constructor(circle){
+//     this.circle = circle
+//   }
+//   draw(){
+//     this.circle.draw()
+//     this.setBorderColor()
+//   }
+//   setBorderColor(){
+//     console.log('设置边框颜色')
+//   }
+// }
+
+// let circle = new Circle()
+// circle.draw()
+// let d1 = new Decorator(circle)
+// d1.draw()
+
+// 代理模式
+class RealImg {
+  constructor(filename){
+    this.filename = filename;
+    this.loadImgFromDisk()
+  }
+  display(){
+    console.log('diplay...',this.filename)
+  }
+  loadImgFromDisk(){
+    console.log('loading...',this.filename)
+  }
+}
+class ProxyImg{
+  constructor(filename){
+    this.filename = new RealImg(filename)
+  }
+  display(){
+    this.filename.display()
   }
 }
 
-class Decorator{
-  constructor(circle){
-    this.circle = circle
-  }
-  draw(){
-    this.circle.draw()
-    this.setBorderColor()
-  }
-  setBorderColor(){
-    console.log('设置边框颜色')
-  }
-}
+let proxyImg = new ProxyImg('1.png');
+proxyImg.display()
 
-let circle = new Circle()
-circle.draw()
-let d1 = new Decorator(circle)
-d1.draw()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
