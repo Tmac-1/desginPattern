@@ -357,45 +357,89 @@
 // proxyImg.display()
 
 // 观察者模式
-/**主题，保存状态，状态变化之后触发所有观察者对象 */ 
-class Subject{
-   constructor(){
-     this.state = 0;
-     this.observers = [];
-   }
-   getState(){
-     return this.state;
-   }
-   setState(state){
-     this.state = state;
-     this.notifyAllObservers()
-   }
-   notifyAllObservers(){
-     this.observers.forEach(observer=>{
-       observer.update()
-     })
-   }
-   attach(observer){
-     this.observers.push(observer)
-   }
+/**主题，保存状态，状态变化之后触发所有观察者对象 node里面EventEmitter Promise React、Vue里面的生命周期 Vue里面的Watch*/ 
+// class Subject{
+//    constructor(){
+//      this.state = 0;
+//      this.observers = [];
+//    }
+//    getState(){
+//      return this.state;
+//    }
+//    setState(state){
+//      this.state = state;
+//      this.notifyAllObservers()
+//    }
+//    notifyAllObservers(){
+//      this.observers.forEach(observer=>{
+//        observer.update()
+//      })
+//    }
+//    attach(observer){
+//      this.observers.push(observer)
+//    }
+// }
+
+// class Observer {
+//   constructor(name,subject){
+//     this.name = name;
+//     this.subject = subject;
+//     this.subject.attach(this)
+//   }
+//   update(){
+//     console.log(`${this.name} update, state: ${this.subject.getState()}`)
+//   }
+// }
+
+// let s1 = new Subject();
+// let o1 = new Observer('o1',s1);
+// let o2 = new Observer('o2',s1);
+// let o3 = new Observer('o3',s1);
+// s1.setState(1)
+
+// 迭代器模式
+class Iterator{
+  constructor(container){
+      this.list = container.list;
+      this.index = 0;
+  }
+  next(){
+    if( this.hasNext() ){
+      return this.list[this.index++]
+    }
+    return null;
+  }
+  hasNext(){
+    if( this.index >= this.list.length){
+      return false;
+    }
+    return true
+  }
+}
+class Container {
+  constructor(list){
+      this.list = list;
+  }
+  // 生成遍历器
+  getIterator(){
+    return new Iterator(this)
+  }
 }
 
-class Observer {
-  constructor(name,subject){
-    this.name = name;
-    this.subject = subject;
-    this.subject.attach(this)
-  }
-  update(){
-    console.log(`${this.name} update, state: ${this.subject.getState()}`)
-  }
+let arr = [1,2,3,4,5,6];
+let container = new Container(arr);
+let iterator = container.getIterator();
+while( iterator.hasNext() ){
+  console.log(iterator.next())
 }
 
-let s1 = new Subject();
-let o1 = new Observer('o1',s1);
-let o2 = new Observer('o2',s1);
-let o3 = new Observer('o3',s1);
-s1.setState(1)
+
+
+
+
+
+
+
 
 
 
