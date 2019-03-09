@@ -398,47 +398,74 @@
 // s1.setState(1)
 
 // 迭代器模式
-class Iterator{
-  constructor(container){
-      this.list = container.list;
-      this.index = 0;
-  }
-  next(){
-    if( this.hasNext() ){
-      return this.list[this.index++]
-    }
-    return null;
-  }
-  hasNext(){
-    if( this.index >= this.list.length){
-      return false;
-    }
-    return true
-  }
+// class Iterator{
+//   constructor(container){
+//       this.list = container.list;
+//       this.index = 0;
+//   }
+//   next(){
+//     if( this.hasNext() ){
+//       return this.list[this.index++]
+//     }
+//     return null;
+//   }
+//   hasNext(){
+//     if( this.index >= this.list.length){
+//       return false;
+//     }
+//     return true
+//   }
+// }
+// class Container {
+//   constructor(list){
+//       this.list = list;
+//   }
+//   // 生成遍历器
+//   getIterator(){
+//     return new Iterator(this)
+//   }
+// }
+
+// let arr = [1,2,3,4,5,6];
+// let container = new Container(arr);
+// let iterator = container.getIterator();
+// while( iterator.hasNext() ){
+//   console.log(iterator.next())
+// }
+
+// 状态模式
+// (有限状态机，有限个状态，以及在这些状态之间变化。简单的Promise)
+class State{
+   constructor(color){
+     this.color = color;
+   }
+   handle(context){
+     console.log(`turn to ${this.color} light`);
+    //  console.log(this)
+     context.setState(this)
+   }
 }
-class Container {
-  constructor(list){
-      this.list = list;
-  }
-  // 生成遍历器
-  getIterator(){
-    return new Iterator(this)
-  }
+class Context{
+   constructor(){
+     this.state = null;
+   }
+   getState(){
+     return this.state;
+   }
+   setState(state){
+     this.state = state;
+   }
 }
-
-let arr = [1,2,3,4,5,6];
-let container = new Container(arr);
-let iterator = container.getIterator();
-while( iterator.hasNext() ){
-  console.log(iterator.next())
-}
-
-
-
-
-
-
-
+let context = new Context();
+let green = new State('green');
+let red = new State('red');
+let yellow = new State('yellow');
+green.handle(context)
+console.log(context.getState())
+red.handle(context)
+console.log(context.getState())
+yellow.handle(context)
+console.log(context.getState())
 
 
 
