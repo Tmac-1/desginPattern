@@ -434,42 +434,42 @@
 // }
 
 // 状态模式
-// (有限状态机，有限个状态，以及在这些状态之间变化。简单的Promise)
-class State{
-   constructor(color){
-     this.color = color;
-   }
-   handle(context){
-     console.log(`turn to ${this.color} light`);
-    //  console.log(this)
-     context.setState(this)
-   }
-}
-class Context{
-   constructor(){
-     this.state = null;
-   }
-   getState(){
-     return this.state;
-   }
-   setState(state){
-     this.state = state;
-   }
-}
-let context = new Context();
-let green = new State('green');
-let red = new State('red');
-let yellow = new State('yellow');
-green.handle(context)
-console.log(context.getState())
-red.handle(context)
-console.log(context.getState())
-yellow.handle(context)
-console.log(context.getState())
+// (有限状态机，有限个状态，以及在这些状态之间变化。简单的Promise,就是个有限状态机)
+// class State{
+//    constructor(color){
+//      this.color = color;
+//    }
+//    handle(context){
+//      console.log(`turn to ${this.color} light`);
+//     //  console.log(this)
+//      context.setState(this)
+//    }
+// }
+// class Context{
+//    constructor(){
+//      this.state = null;
+//    }
+//    getState(){
+//      return this.state;
+//    }
+//    setState(state){
+//      this.state = state;
+//    }
+// }
+// let context = new Context();
+// let green = new State('green');
+// let red = new State('red');
+// let yellow = new State('yellow');
+// green.handle(context)
+// console.log(context.getState())
+// red.handle(context)
+// console.log(context.getState())
+// yellow.handle(context)
+// console.log(context.getState())
 
-
-
-
+import App from './demo/App.js'
+let app = new App('app')
+app.init()
 
 
 
